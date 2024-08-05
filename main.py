@@ -1,6 +1,6 @@
 import nltk
-from nltk.tokenize import word_tokenize
-nltk.download('punkt')
+# from nltk.tokenize import word_tokenize
+# nltk.download('punkt')
 import numpy as np
 import pandas as pd 
 from credentials_connection import User
@@ -33,11 +33,10 @@ def load_text(filename):
     
 sf = salesforce_login()
 name_keys = get_names(sf)
-evaluations = load_text('test1.csv')
+
+resp = pd.read_csv('NoNulls_NoCommas.csv')
+
 for el in name_keys:
-    found = evaluations.apply(lambda x: x.map(lambda s: search_string(s, el)))
+    found = resp.apply(lambda x: x.map(lambda s: search_string(s, el)))
     print(found)
 
-text = "Hello, how are you doing?"
-tokens = word_tokenize(text)
-print(tokens)
