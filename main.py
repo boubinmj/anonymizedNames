@@ -25,7 +25,11 @@ def get_names(sf):
     return name_list
 
 def search_string(s, search):
-    return search in str(s).lower()
+    x = str(search).lower()
+    if(x in str(s).lower()):
+        return s.replace(search, "professor")
+    else:
+        return s
 
 def load_text(filename):
     df = pd.read_csv(filename)
@@ -33,10 +37,11 @@ def load_text(filename):
     
 sf = salesforce_login()
 name_keys = get_names(sf)
+print(name_keys)
 
-resp = pd.read_csv('NoNulls_NoCommas.csv')
+resp = pd.read_csv('NoNulls_NoCommas_Headers.csv')
 
 for el in name_keys:
-    found = resp.apply(lambda x: x.map(lambda s: search_string(s, el)))
-    print(found)
+    resp = resp.apply(lambda x: x.map(lambda s: search_string(s, el)))
 
+resp.to_csv('responses_anon.csv')
