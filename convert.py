@@ -42,7 +42,7 @@ payload = {
 }
 headers = {
   # Get your API key: https://tableconvert.com/profile/
-  'Authorization': 'Bearer 2dl6AXWry1ZTYDTUR8NI4Ed9Icrkvpmt'
+  'Authorization': 'Bearer <bearer>'
 }
 
 response = requests.post(url, data=payload, headers=headers)
